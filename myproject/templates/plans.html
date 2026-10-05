@@ -1,0 +1,245 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#f6f8f4">
+	<meta name="description" content="Compare sample individual, couple, and family health plan options.">
+	<title>Explore Plans | Health Insurance Health</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--ink: #193c35;
+			--muted: #65766f;
+			--paper: #f6f8f4;
+			--white: #fff;
+			--green: #c9e8d7;
+			--green-strong: #287356;
+			--lime: #e3f477;
+			--peach: #f4b99c;
+			--line: #e2e9e2;
+			--serif: "Manrope", sans-serif;
+			--sans: "DM Sans", sans-serif;
+		}
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+		body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+		a { color: inherit; text-decoration: none; }
+		.shell { width: min(1160px, calc(100% - 64px)); margin: 0 auto; }
+		.topbar { height: 82px; display: flex; align-items: center; border-bottom: 1px solid rgba(25, 60, 53, .08); }
+		.nav { display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+		.brand { display: inline-flex; align-items: center; gap: 10px; font: 800 21px var(--serif); white-space: nowrap; }
+		.brand-mark { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 10px; background: var(--green-strong); color: white; }
+		.brand-mark svg { width: 18px; height: 18px; }
+		.nav-links { display: flex; align-items: center; gap: 27px; margin-left: auto; color: #52675f; font-size: 13px; font-weight: 600; }
+		.nav-links a:hover, .nav-links .active, .footer-links a:hover { color: var(--green-strong); }
+		.button { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 0 18px; border-radius: 6px; background: var(--ink); color: white; font-size: 12px; font-weight: 700; transition: transform .18s ease, background .18s ease; }
+		.button:hover { background: #27584a; transform: translateY(-2px); }
+		main { padding: 65px 0 82px; }
+		.intro { display: flex; align-items: end; justify-content: space-between; gap: 40px; padding-bottom: 34px; }
+		.eyebrow { display: inline-flex; align-items: center; gap: 9px; color: var(--green-strong); font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+		.eyebrow::before { width: 7px; height: 7px; border-radius: 50%; background: #6cb38a; content: ""; }
+		h1, h2, h3, p { margin-top: 0; }
+		h1 { max-width: 620px; margin: 16px 0 12px; font: 600 clamp(42px, 5vw, 62px)/1.08 var(--serif); }
+		h1 em { color: var(--green-strong); font-style: normal; }
+		.intro-copy { max-width: 590px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.75; }
+		.intro-aside { max-width: 260px; padding-left: 19px; border-left: 2px solid var(--peach); color: #52675f; font-size: 12px; line-height: 1.7; }
+		.sample-note { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 34px; padding: 15px 18px; border: 1px solid #eadacb; background: #fff7f0; color: #6c5041; font-size: 12px; line-height: 1.65; }
+		.sample-note strong { color: #503729; }
+		.sample-note svg { width: 18px; height: 18px; flex: none; margin-top: 1px; }
+		.category-nav { display: flex; gap: 10px; margin-bottom: 44px; }
+		.category-nav a { min-height: 39px; display: inline-flex; align-items: center; padding: 0 15px; border: 1px solid var(--line); border-radius: 4px; background: white; color: #52675f; font-size: 12px; font-weight: 700; }
+		.category-nav a:hover { border-color: var(--green-strong); color: var(--green-strong); }
+		.category { padding: 0 0 51px; scroll-margin-top: 24px; }
+		.category + .category { padding-top: 43px; border-top: 1px solid var(--line); }
+		.category-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 20px; }
+		.category-heading h2 { margin: 0 0 5px; font: 700 25px/1.25 var(--serif); }
+		.category-heading p { max-width: 470px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.65; }
+		.price-unit { color: var(--muted); font-size: 11px; white-space: nowrap; }
+		.plan-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+		.plan-card { position: relative; display: flex; flex-direction: column; min-width: 0; min-height: 315px; padding: 23px; border: 1px solid var(--line); background: var(--white); }
+		.plan-card.featured { border-color: #a8cfb7; background: #f0f7f1; }
+		.plan-label { min-height: 16px; margin-bottom: 10px; color: var(--green-strong); font-size: 10px; font-weight: 700; letter-spacing: .7px; text-transform: uppercase; }
+		.plan-card h3 { margin-bottom: 7px; font: 700 18px var(--serif); }
+		.plan-description { min-height: 38px; margin-bottom: 17px; color: var(--muted); font-size: 11px; line-height: 1.6; }
+		.price { display: flex; align-items: baseline; gap: 5px; margin-bottom: 17px; }
+		.price strong { font: 800 31px/1 var(--serif); }
+		.price span { color: var(--muted); font-size: 11px; }
+		.plan-rule { height: 1px; margin-bottom: 15px; background: var(--line); }
+		.plan-card ul { display: grid; gap: 10px; margin: 0 0 22px; padding: 0; list-style: none; color: #52675f; font-size: 11px; line-height: 1.5; }
+		.plan-card li { display: flex; gap: 8px; }
+		.plan-card li::before { color: var(--green-strong); content: "✓"; font-weight: 700; }
+		.plan-card .button { width: 100%; margin-top: auto; }
+		.plan-card.featured .button { background: var(--green-strong); }
+		.bottom-note { margin: -1px 0 0; color: var(--muted); font-size: 11px; line-height: 1.7; }
+		.cta-band { padding: 38px 0; background: #dcefe2; }
+		.cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+		.cta-inner h2 { margin: 0; font: 700 25px/1.3 var(--serif); }
+		.cta-inner p { margin: 5px 0 0; color: #567065; font-size: 12px; }
+		footer { padding: 25px 0; }
+		.footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 18px; color: var(--muted); font-size: 11px; }
+		.footer-links { display: flex; gap: 20px; }
+		@media (max-width: 850px) {
+			.shell { width: min(100% - 40px, 680px); }
+			.nav-links { gap: 15px; }
+			.intro { display: block; }
+			.intro-aside { max-width: 500px; margin-top: 22px; }
+			.plan-grid { gap: 10px; }
+			.plan-card { padding: 18px; }
+		}
+		@media (max-width: 620px) {
+			.shell { width: calc(100% - 36px); }
+			.topbar { height: 70px; }
+			.brand { font-size: 18px; }
+			.nav-links { display: none; }
+			.nav > .button { min-height: 40px; padding: 0 13px; font-size: 11px; }
+			main { padding: 49px 0 58px; }
+			.intro { padding-bottom: 27px; }
+			h1 { font-size: clamp(42px, 11vw, 56px); }
+			.intro-copy { font-size: 13px; }
+			.category-nav { overflow-x: auto; margin-right: -18px; padding-bottom: 4px; }
+			.category-nav a { flex: none; }
+			.category { padding-bottom: 36px; }
+			.category + .category { padding-top: 32px; }
+			.category-heading { display: block; }
+			.price-unit { display: inline-block; margin-top: 8px; }
+			.plan-grid { grid-template-columns: 1fr; gap: 10px; }
+			.plan-card { min-height: auto; padding: 20px; }
+			.plan-description { min-height: auto; }
+			.plan-card .button { margin-top: 0; }
+			.cta-inner { align-items: flex-start; flex-direction: column; }
+			.footer-inner { align-items: flex-start; flex-direction: column; }
+			.footer-links { flex-wrap: wrap; gap: 13px 18px; }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+		}
+	</style>
+</head>
+<body>
+	<header class="topbar">
+		<nav class="nav shell" aria-label="Main navigation">
+			<a class="brand" href="{% url 'home' %}" aria-label="Health Insurance Health home">
+				<span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 20s-7.2-4.4-7.2-10a4.1 4.1 0 0 1 7.2-2.7A4.1 4.1 0 0 1 19.2 10c0 5.6-7.2 10-7.2 10Z" stroke="currentColor" stroke-width="1.8"/><path d="M7.5 12h3l1.2-2.4 1.7 4.7 1.1-2.3h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+				Health Insurance
+			</a>
+			<div class="nav-links">
+				<a href="{% url 'coverage' %}">Coverage guide</a>
+				<a class="active" href="{% url 'plans' %}" aria-current="page">Plans</a>
+				<a href="{% url 'why_insurance' %}">Why health insurance</a>
+			</div>
+			<a class="button" href="{% url 'member_support' %}">Member support</a>
+		</nav>
+	</header>
+	<main class="shell">
+		<section class="intro" aria-labelledby="plans-title">
+			<div>
+				<span class="eyebrow">A starting point for comparing</span>
+				<h1 id="plans-title">Plans for the way <em>you live.</em></h1>
+				<p class="intro-copy">Compare simple sample options for individuals, couples, and families. Think about the care you use, your preferred providers, and what fits your budget.</p>
+			</div>
+			<p class="intro-aside">Choose a household category to compare three levels of sample coverage and monthly cost.</p>
+		</section>
+		<aside class="sample-note" aria-label="Sample pricing notice">
+			<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M12 11v5M12 8h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+			<span><strong>Sample prices only:</strong> All figures on this demo page are illustrative monthly amounts in USD, not actual quotes or available products. Real premiums, eligibility, covered services, networks, and out-of-pocket costs vary by location and plan. Review official plan documents before making a decision.</span>
+		</aside>
+		<nav class="category-nav" aria-label="Plan categories">
+			<a href="#individual">Individual</a>
+			<a href="#couples">Couples</a>
+			<a href="#families">Families</a>
+		</nav>
+
+		<section class="category" id="individual" aria-labelledby="individual-title">
+			<div class="category-heading">
+				<div><h2 id="individual-title">Individual coverage</h2><p>Options for one adult looking for a balance of routine, unexpected, and ongoing care.</p></div>
+				<span class="price-unit">Sample price per month · 1 adult</span>
+			</div>
+			<div class="plan-grid">
+				<article class="plan-card">
+					<div class="plan-label">Lower monthly cost</div><h3>Essential</h3><p class="plan-description">A simple starting point for routine care and the unexpected.</p>
+					<div class="price"><strong>$185</strong><span>/ month</span></div><div class="plan-rule"></div>
+					<ul><li>Preventive and primary care focus</li><li>Access to urgent and emergency care</li><li>Core prescription coverage</li></ul>
+					<a class="button" href="{% url 'member_support' %}">Ask about this option</a>
+				</article>
+				<article class="plan-card featured">
+					<div class="plan-label">Balanced option</div><h3>Everyday</h3><p class="plan-description">More room for regular visits, prescriptions, and specialist care.</p>
+					<div class="price"><strong>$295</strong><span>/ month</span></div><div class="plan-rule"></div>
+					<ul><li>Routine and specialist care focus</li><li>Prescription and diagnostic support</li><li>Urgent and emergency care</li></ul>
+					<a class="button" href="{% url 'member_support' %}">Ask about this option</a>
+				</article>
+				<article class="plan-card">
+					<div class="plan-label">More comprehensive</div><h3>Complete</h3><p class="plan-description">A broader sample option for people expecting more ongoing care.</p>
+					<div class="price"><strong>$420</strong><span>/ month</span></div><div class="plan-rule"></div>
+					<ul><li>Expanded outpatient care focus</li><li>Ongoing and specialist care support</li><li>Prescription and diagnostic support</li></ul>
+					<a class="button" href="{% url 'member_support' %}">Ask about this option</a>
+				</article>
+			</div>
+		</section>
+
+		<section class="category" id="couples" aria-labelledby="couples-title">
+			<div class="category-heading">
+				<div><h2 id="couples-title">Couple coverage</h2><p>Sample options for two adults sharing a household plan.</p></div>
+				<span class="price-unit">Sample price per month · 2 adults</span>
+			</div>
+			<div class="plan-grid">
+				<article class="plan-card">
+					<div class="plan-label">Lower monthly cost</div><h3>Essential</h3><p class="plan-description">Core care for two, with a focus on keeping monthly costs lower.</p>
+					<div class="price"><strong>$350</strong><span>/ month</span></div><div class="plan-rule"></div>
+					<ul><li>Preventive and primary care focus</li><li>Access to urgent and emergency care</li><li>Core prescription coverage</li></ul>
+					<a class="button" href="{% url 'member_support' %}">Ask about this option</a>
+				</article>
+				<article class="plan-card featured">
+					<div class="plan-label">Balanced option</div><h3>Everyday</h3><p class="plan-description">A middle-ground sample for regular care and changing needs.</p>
+					<div class="price"><strong>$560</strong><span>/ month</span></div><div class="plan-rule"></div>
+					<ul><li>Routine and specialist care focus</li><li>Prescription and diagnostic support</li><li>Urgent and emergency care</li></ul>
+					<a class="button" href="{% url 'member_support' %}">Ask about this option</a>
+				</article>
+				<article class="plan-card">
+					<div class="plan-label">More comprehensive</div><h3>Complete</h3><p class="plan-description">A broader sample option for two people with ongoing care needs.</p>
+					<div class="price"><strong>$795</strong><span>/ month</span></div><div class="plan-rule"></div>
+					<ul><li>Expanded outpatient care focus</li><li>Ongoing and specialist care support</li><li>Prescription and diagnostic support</li></ul>
+					<a class="button" href="{% url 'member_support' %}">Ask about this option</a>
+				</article>
+			</div>
+		</section>
+
+		<section class="category" id="families" aria-labelledby="families-title">
+			<div class="category-heading">
+				<div><h2 id="families-title">Family coverage</h2><p>Sample options for households covering adults and children.</p></div>
+				<span class="price-unit">Sample price per month · family</span>
+			</div>
+			<div class="plan-grid">
+				<article class="plan-card">
+					<div class="plan-label">Lower monthly cost</div><h3>Essential</h3><p class="plan-description">Core household coverage centered on preventive and everyday care.</p>
+					<div class="price"><strong>$520</strong><span>/ month</span></div><div class="plan-rule"></div>
+					<ul><li>Preventive and primary care focus</li><li>Access to urgent and emergency care</li><li>Core prescription coverage</li></ul>
+					<a class="button" href="{% url 'member_support' %}">Ask about this option</a>
+				</article>
+				<article class="plan-card featured">
+					<div class="plan-label">Balanced option</div><h3>Everyday</h3><p class="plan-description">More flexibility for the routine care needs of a growing household.</p>
+					<div class="price"><strong>$780</strong><span>/ month</span></div><div class="plan-rule"></div>
+					<ul><li>Routine and specialist care focus</li><li>Prescription and diagnostic support</li><li>Urgent and emergency care</li></ul>
+					<a class="button" href="{% url 'member_support' %}">Ask about this option</a>
+				</article>
+				<article class="plan-card">
+					<div class="plan-label">More comprehensive</div><h3>Complete</h3><p class="plan-description">A broader sample option for households with more ongoing care.</p>
+					<div class="price"><strong>$1,120</strong><span>/ month</span></div><div class="plan-rule"></div>
+					<ul><li>Expanded outpatient care focus</li><li>Ongoing and specialist care support</li><li>Prescription and diagnostic support</li></ul>
+					<a class="button" href="{% url 'member_support' %}">Ask about this option</a>
+				</article>
+			</div>
+		</section>
+		<p class="bottom-note">Plan names and benefit descriptions are examples for this demo only. Actual coverage, exclusions, cost sharing, provider networks, and prices must be confirmed in official plan materials.</p>
+	</main>
+	<section class="cta-band">
+		<div class="cta-inner shell"><div><h2>Have questions while comparing?</h2><p>Our member support team can help point you to the right information.</p></div><a class="button" href="{% url 'member_support' %}">Contact member support <span aria-hidden="true">&rarr;</span></a></div>
+	</section>
+	<footer>
+		<div class="footer-inner shell"><span>Health Insurance Health | Health coverage, with a little more heart.</span><div class="footer-links"><a href="{% url 'home' %}">Home</a><a href="{% url 'coverage' %}">Coverage guide</a><a href="{% url 'member_support' %}">Member support</a></div></div>
+	</footer>
+</body>
+</html>

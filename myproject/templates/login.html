@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#f6f8f4">
+	<title>Log in | Health Insurance Health</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/static/css/accounts.css">
+</head>
+<body>
+	<div class="account-frame">
+		<aside class="account-visual" aria-label="Care and wellbeing">
+			<img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&amp;fit=crop&amp;w=1200&amp;h=1400&amp;q=85" alt="">
+			<div class="visual-copy"><span>Health Insurance Health</span><h2>Care that sees the whole you.</h2><p>Thoughtful coverage and clear support, for every step along the way.</p></div>
+		</aside>
+		<section class="account-panel">
+			<header class="account-top">
+				<a class="brand" href="/"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 20s-7.2-4.4-7.2-10a4.1 4.1 0 0 1 7.2-2.7A4.1 4.1 0 0 1 19.2 10c0 5.6-7.2 10-7.2 10Z" stroke="currentColor" stroke-width="1.8"/><path d="M7.5 12h3l1.2-2.4 1.7 4.7 1.1-2.3h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Health Insurance</a>
+				<a class="top-link" href="/register/">Create account</a>
+			</header>
+			<main class="account-content">
+				<div class="eyebrow">Welcome back</div>
+				<h1>Log in to your account.</h1>
+				<p class="intro">Sign in to continue to your member account and care information.</p>
+				<form class="account-form">
+					<div class="field">
+						<label for="login-identifier">Username or email</label>
+						<input class="input" id="login-identifier" name="identifier" type="text" autocomplete="username" placeholder="Your username or email" required autofocus>
+					</div>
+					<div class="field">
+						<label for="login-password">Password</label>
+						<input class="input" id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Your password" required>
+					</div>
+					<div class="form-meta"><a href="/member-support/">Forgot password?</a></div>
+					<div class="form-actions"><button class="button" type="button">Log in</button></div>
+				</form>
+				<p class="account-switch">New here? <a href="/register/">Create a patient account</a></p>
+			</main>
+		</section>
+	</div>
+</body>
+</html>

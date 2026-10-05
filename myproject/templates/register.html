@@ -1,0 +1,83 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#f6f8f4">
+	<title>Register | Health Insurance Health</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/static/css/accounts.css">
+</head>
+<body>
+	<div class="account-frame">
+		<aside class="account-visual" aria-label="Care and wellbeing">
+			<img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&amp;fit=crop&amp;w=1200&amp;h=1400&amp;q=85" alt="">
+			<div class="visual-copy"><span>Health Insurance Health</span><h2>Care that sees the whole you.</h2><p>Thoughtful coverage and clear support, for every step along the way.</p></div>
+		</aside>
+		<section class="account-panel">
+			<header class="account-top">
+				<a class="brand" href="/"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 20s-7.2-4.4-7.2-10a4.1 4.1 0 0 1 7.2-2.7A4.1 4.1 0 0 1 19.2 10c0 5.6-7.2 10-7.2 10Z" stroke="currentColor" stroke-width="1.8"/><path d="M7.5 12h3l1.2-2.4 1.7 4.7 1.1-2.3h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Health Insurance</a>
+				<a class="top-link" href="/login/">Log in</a>
+			</header>
+			<main class="account-content">
+				<div class="eyebrow">A little more peace of mind</div>
+				<h1>Create your account.</h1>
+				<p class="intro">Set up your patient profile to keep your care details together.</p>
+				<form class="account-form">
+					<div class="form-grid">
+						<div class="field field-wide">
+							<label for="profile-picture">Profile picture</label>
+							<label class="profile-upload" for="profile-picture" title="Choose a profile picture" aria-label="Choose a profile picture">
+								<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5h2l1.1-1.5h4.8L15.5 5h2A2.5 2.5 0 0 1 20 7.5v9a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5v-9Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.6"/></svg>
+							</label>
+							<input class="visually-hidden" id="profile-picture" name="profile_picture" type="file" accept="image/*" required>
+						</div>
+						<div class="field">
+							<label for="first-name">First name</label>
+							<input class="input" id="first-name" name="first_name" type="text" autocomplete="given-name" required>
+						</div>
+						<div class="field">
+							<label for="last-name">Last name</label>
+							<input class="input" id="last-name" name="last_name" type="text" autocomplete="family-name" required>
+						</div>
+						<div class="field">
+							<label for="register-email">Email address</label>
+							<input class="input" id="register-email" name="email" type="email" autocomplete="email" required>
+						</div>
+						<div class="field">
+							<label for="phone-number">Phone number</label>
+							<input class="input" id="phone-number" name="phone_number" type="tel" autocomplete="tel" required>
+						</div>
+						<div class="field">
+							<label for="date-of-birth">Date of birth</label>
+							<input class="input" id="date-of-birth" name="date_of_birth" type="date" autocomplete="bday" required>
+						</div>
+						<div class="field">
+							<label for="gender">Gender</label>
+							<select class="input" id="gender" name="gender" required>
+								<option value="" selected disabled>Select gender</option>
+								<option value="female">Female</option>
+								<option value="male">Male</option>
+								<option value="non_binary">Non-binary</option>
+								<option value="prefer_not_to_say">Prefer not to say</option>
+							</select>
+						</div>
+						<div class="field field-wide">
+							<label for="register-password">Password</label>
+							<input class="input" id="register-password" name="password" type="password" autocomplete="new-password" required>
+						</div>
+					</div>
+					<div class="form-actions">
+						<button class="button" type="button">Register</button>
+						<button class="button button-secondary" type="reset">Clear</button>
+					</div>
+				</form>
+				<p class="account-switch">Already registered? <a href="/login/">Log in</a></p>
+			</main>
+		</section>
+	</div>
+</body>
+</html>

@@ -1,0 +1,267 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#193c35">
+	<meta name="description" content="A visual guide to choosing a health plan, getting care, and understanding how costs are shared.">
+	<title>How Health Insurance Works | Health Insurance Health</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--ink: #193c35;
+			--muted: #65766f;
+			--paper: #f6f8f4;
+			--white: #fff;
+			--green: #c9e8d7;
+			--green-strong: #287356;
+			--lime: #e3f477;
+			--peach: #f4b99c;
+			--line: #dfe7df;
+			--serif: "Manrope", sans-serif;
+			--sans: "DM Sans", sans-serif;
+		}
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+		body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+		a { color: inherit; text-decoration: none; }
+		h1, h2, h3, p { margin-top: 0; }
+		.shell { width: min(1160px, calc(100% - 64px)); margin: 0 auto; }
+		.topbar { height: 78px; display: flex; align-items: center; background: var(--ink); color: white; }
+		.nav { display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+		.brand { display: inline-flex; align-items: center; gap: 10px; font: 800 20px var(--serif); white-space: nowrap; }
+		.brand-mark { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 10px; background: var(--lime); color: var(--ink); }
+		.brand-mark svg { width: 18px; height: 18px; }
+		.nav-links { display: flex; align-items: center; gap: 28px; margin-left: auto; color: #d5e2da; font-size: 13px; font-weight: 600; }
+		.nav-links a:hover, .nav-links .active { color: var(--lime); }
+		.nav-button { min-height: 42px; display: inline-flex; align-items: center; justify-content: center; padding: 0 16px; border-radius: 5px; background: var(--lime); color: var(--ink); font-size: 12px; font-weight: 700; }
+		.hero { position: relative; overflow: hidden; background: var(--ink); color: white; }
+		.hero-inner { min-height: 490px; display: grid; grid-template-columns: .92fr 1.08fr; align-items: center; gap: 60px; padding-top: 45px; padding-bottom: 58px; }
+		.hero-copy { position: relative; z-index: 2; max-width: 495px; }
+		.kicker { display: inline-flex; align-items: center; gap: 9px; color: var(--lime); font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+		.kicker::before { width: 7px; height: 7px; border-radius: 50%; background: var(--peach); content: ""; }
+		h1 { margin: 20px 0 17px; font: 600 clamp(44px, 5.1vw, 68px)/1.07 var(--serif); }
+		h1 em { color: var(--lime); font-style: normal; }
+		.hero-copy p { max-width: 440px; margin-bottom: 26px; color: #d2ded7; font-size: 15px; line-height: 1.8; }
+		.hero-action { display: inline-flex; align-items: center; gap: 10px; padding: 13px 17px; border-radius: 5px; background: white; color: var(--ink); font-size: 12px; font-weight: 700; }
+		.hero-action span { color: var(--green-strong); font-size: 17px; line-height: 1; }
+		.hero-gallery { position: relative; min-height: 370px; }
+		.gallery-main { position: absolute; top: 0; right: 4%; width: 66%; height: 330px; overflow: hidden; border-radius: 48% 48% 5px 5px; background: #d9e6dd; }
+		.gallery-main img, .gallery-small img { width: 100%; height: 100%; object-fit: cover; }
+		.gallery-main img { object-position: center 40%; }
+		.gallery-small { position: absolute; z-index: 1; width: 35%; height: 142px; overflow: hidden; border: 5px solid var(--ink); border-radius: 5px; background: #d9e6dd; }
+		.gallery-small.first { left: 2%; bottom: 13px; }
+		.gallery-small.second { right: 0; bottom: 0; width: 29%; height: 114px; border-color: var(--lime); }
+		.gallery-caption { position: absolute; z-index: 2; top: 15px; right: 0; padding: 10px 13px; background: var(--lime); color: var(--ink); font: 700 11px var(--serif); }
+		.intro { padding: 38px 0; background: #e8f1e9; }
+		.intro-inner { display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+		.intro strong { max-width: 330px; font: 700 18px/1.5 var(--serif); }
+		.intro p { max-width: 650px; margin: 0; color: #52675f; font-size: 13px; line-height: 1.75; }
+		.journey { padding: 86px 0 92px; }
+		.journey-heading { display: grid; grid-template-columns: .8fr 1.2fr; align-items: end; gap: 50px; margin-bottom: 52px; }
+		.eyebrow { color: var(--green-strong); font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+		.journey-heading h2 { max-width: 420px; margin: 12px 0 0; font: 600 39px/1.17 var(--serif); }
+		.journey-heading p { max-width: 450px; margin: 0 0 4px; color: var(--muted); font-size: 13px; line-height: 1.8; }
+		.steps { position: relative; display: grid; gap: 38px; }
+		.steps::before { position: absolute; top: 14px; bottom: 14px; left: 50%; width: 1px; background: var(--line); content: ""; }
+		.step { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 76px; min-height: 280px; }
+		.step:nth-child(even) .step-image { order: 2; }
+		.step:nth-child(even) .step-copy { order: 1; text-align: right; }
+		.step-image { position: relative; z-index: 1; height: 275px; overflow: hidden; border: 1px solid #000; border-radius: 5px; background: #dbe7dd; }
+		.step-image img { width: 100%; height: 100%; object-fit: cover; }
+		.step:nth-child(1) .step-image img { object-position: center; }
+		.step:nth-child(2) .step-image img { object-position: center 38%; }
+		.step:nth-child(3) .step-image img { object-position: center 42%; }
+		.step:nth-child(4) .step-image img { object-position: center; }
+		.step-copy { position: relative; z-index: 1; padding: 17px 0; background: var(--paper); }
+		.step-count { display: inline-grid; width: 37px; height: 37px; place-items: center; margin-bottom: 15px; border-radius: 50%; background: var(--green); color: var(--ink); font: 700 12px var(--serif); }
+		.step:nth-child(2) .step-count { background: var(--peach); }
+		.step:nth-child(3) .step-count { background: var(--lime); }
+		.step h3 { margin-bottom: 10px; font: 700 22px var(--serif); }
+		.step p { max-width: 420px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.8; }
+		.step:nth-child(even) .step-copy p { margin-left: auto; }
+		.terms { padding: 60px 0; background: #f1d8ca; }
+		.terms-inner { display: grid; grid-template-columns: .8fr 1.2fr; gap: 70px; align-items: start; }
+		.terms h2 { max-width: 350px; margin: 12px 0 0; font: 600 34px/1.2 var(--serif); }
+		.terms-copy { color: #5f544e; font-size: 13px; line-height: 1.8; }
+		.terms-copy p { margin-bottom: 15px; }
+		.terms-copy p:last-child { margin-bottom: 0; }
+		.disclaimer { padding: 21px 0; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 11px; line-height: 1.7; }
+		.cta { padding: 46px 0; }
+		.cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 25px; }
+		.cta h2 { max-width: 570px; margin: 0; font: 600 29px/1.2 var(--serif); }
+		.cta p { margin: 7px 0 0; color: var(--muted); font-size: 12px; }
+		.cta-button { min-height: 45px; display: inline-flex; align-items: center; padding: 0 17px; border-radius: 5px; background: var(--ink); color: white; font-size: 12px; font-weight: 700; }
+		footer { padding: 26px 0; border-top: 1px solid var(--line); }
+		.footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; color: var(--muted); font-size: 11px; }
+		.footer-links { display: flex; gap: 20px; }
+		@media (max-width: 850px) {
+			.shell { width: min(100% - 40px, 660px); }
+			.nav-links { gap: 16px; }
+			.hero-inner { grid-template-columns: 1fr 1fr; gap: 25px; }
+			.hero-gallery { min-height: 320px; }
+			.gallery-main { height: 280px; }
+			.gallery-small { height: 120px; }
+			.step { gap: 40px; }
+		}
+		@media (max-width: 620px) {
+			.shell { width: calc(100% - 36px); }
+			.topbar { height: 68px; }
+			.brand { font-size: 17px; }
+			.nav-links { display: none; }
+			.nav-button { min-height: 38px; padding: 0 11px; font-size: 11px; }
+			.hero-inner { grid-template-columns: 1fr; gap: 12px; padding-top: 42px; padding-bottom: 32px; }
+			h1 { max-width: 480px; font-size: clamp(43px, 12vw, 58px); }
+			.hero-copy p { font-size: 14px; }
+			.hero-gallery { min-height: 300px; margin: 0 3px; }
+			.gallery-main { right: 6%; width: 68%; height: 255px; }
+			.gallery-small { width: 38%; height: 112px; }
+			.gallery-small.second { width: 28%; height: 92px; }
+			.intro { padding: 28px 0; }
+			.intro-inner { align-items: flex-start; flex-direction: column; gap: 8px; }
+			.intro strong { font-size: 16px; }
+			.journey { padding: 62px 0 70px; }
+			.journey-heading { grid-template-columns: 1fr; gap: 12px; margin-bottom: 30px; }
+			.journey-heading h2 { font-size: 32px; }
+			.steps { gap: 30px; }
+			.steps::before { left: 17px; }
+			.step { grid-template-columns: 35px 1fr; gap: 0 14px; min-height: 0; align-items: start; }
+			.step:nth-child(even) .step-image, .step:nth-child(even) .step-copy { order: initial; }
+			.step-image { grid-column: 2; grid-row: 1; height: 210px; }
+			.step-copy, .step:nth-child(even) .step-copy { grid-column: 2; grid-row: 2; padding: 16px 0 0; text-align: left; }
+			.step-count { position: absolute; top: 0; left: 0; width: 35px; height: 35px; margin: 0; }
+			.step h3 { font-size: 20px; }
+			.step:nth-child(even) .step-copy p { margin-left: 0; }
+			.terms { padding: 42px 0; }
+			.terms-inner { grid-template-columns: 1fr; gap: 16px; }
+			.terms h2 { font-size: 30px; }
+			.cta { padding: 38px 0; }
+			.cta-inner { align-items: flex-start; flex-direction: column; }
+			.cta h2 { font-size: 27px; }
+			.footer-inner { align-items: flex-start; flex-direction: column; }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+		}
+	</style>
+</head>
+<body>
+	<header class="topbar">
+		<nav class="nav shell" aria-label="Main navigation">
+			<a class="brand" href="{% url 'home' %}" aria-label="Health Insurance Health home">
+				<span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 20s-7.2-4.4-7.2-10a4.1 4.1 0 0 1 7.2-2.7A4.1 4.1 0 0 1 19.2 10c0 5.6-7.2 10-7.2 10Z" stroke="currentColor" stroke-width="1.8"/><path d="M7.5 12h3l1.2-2.4 1.7 4.7 1.1-2.3h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+				Health Insurance
+			</a>
+			<div class="nav-links">
+				<a href="{% url 'coverage' %}">Coverage</a>
+				<a href="{% url 'why_insurance' %}">Why health insurance</a>
+				<a class="active" href="{% url 'how_it_works' %}" aria-current="page">How it works</a>
+			</div>
+			<a class="nav-button" href="{% url 'coverage' %}">Explore coverage</a>
+		</nav>
+	</header>
+
+	<main>
+		<section class="hero">
+			<div class="hero-inner shell">
+				<div class="hero-copy">
+					<div class="kicker">A guide from plan to care</div>
+					<h1>Health insurance, <em>step by step.</em></h1>
+					<p>A health plan helps share the cost of eligible care. Here’s the usual path, from comparing your options to understanding a bill.</p>
+					<a class="hero-action" href="#journey">See how the steps fit together <span aria-hidden="true">&darr;</span></a>
+				</div>
+				<div class="hero-gallery" aria-label="People and places involved in getting healthcare">
+					<div class="gallery-main"><img src="{% static 'Images/unnamed.png' %}" alt="Healthcare professional in a clinical setting"></div>
+					<div class="gallery-small first"><img src="{% static 'Images/health-insurance.webp' %}" alt="Patient speaking with a healthcare professional"></div>
+					<div class="gallery-small second"><img src="{% static 'Images/health-hero-image.webp' %}" alt="Bright hospital and care facilities" loading="lazy"></div>
+					<span class="gallery-caption">Your care, made clearer</span>
+				</div>
+			</div>
+		</section>
+
+		<section class="intro">
+			<div class="intro-inner shell">
+				<strong>Think of it as a partnership between you, your plan, and your care providers.</strong>
+				<p>You pay a premium to keep the policy active. When you receive care, the plan applies its coverage rules and shares eligible costs. Your exact benefits, network, and costs depend on the policy you choose.</p>
+			</div>
+		</section>
+
+		<section class="journey shell" id="journey" aria-labelledby="journey-title">
+			<div class="journey-heading">
+				<div>
+					<div class="eyebrow">The journey</div>
+					<h2 id="journey-title">Four steps. A clearer picture.</h2>
+				</div>
+				<p>Each plan works a little differently, but these are the main things to expect. Check your plan documents for the specific rules and amounts that apply to you.</p>
+			</div>
+			<div class="steps">
+				<article class="step">
+					<div class="step-image"><img src="{% static 'Images/choose_plan.png' %}" alt="A patient discussing care with a clinician" loading="lazy"></div>
+					<div class="step-copy">
+						<span class="step-count">01</span>
+						<h3>Choose a plan</h3>
+						<p>Compare the monthly premium, deductible, copayments, out-of-pocket maximum, and provider network. Think about your care needs, prescriptions, and budget.</p>
+					</div>
+				</article>
+				<article class="step">
+					<div class="step-image"><img src="{% static 'Images/pay_preminum.png' %}" alt="Healthcare team ready to provide care" loading="lazy"></div>
+					<div class="step-copy">
+						<span class="step-count">02</span>
+						<h3>Pay your premium</h3>
+						<p>Your premium is the regular amount you pay to keep coverage active. You may also pay a deductible or a share of costs when you use covered services.</p>
+					</div>
+				</article>
+				<article class="step">
+					<div class="step-image"><img src="{% static 'Images/get_care.jpeg' %}" alt="Doctor talking through care with a patient" loading="lazy"></div>
+					<div class="step-copy">
+						<span class="step-count">03</span>
+						<h3>Get the care you need</h3>
+						<p>When you need care, check whether the provider is in your plan’s network and whether the service needs a referral or prior approval. Preventive care may have different cost rules.</p>
+					</div>
+				</article>
+				<article class="step">
+					<div class="step-image"><img src="{% static 'Images/under_bill.png' %}" alt="Modern healthcare facility where patients receive care" loading="lazy"></div>
+					<div class="step-copy">
+						<span class="step-count">04</span>
+						<h3>Understand the bill</h3>
+						<p>Your provider usually sends a claim to the insurer. The plan processes it and explains what it paid and what you may owe. Review the explanation of benefits, then compare it with the provider’s bill.</p>
+					</div>
+				</article>
+			</div>
+		</section>
+
+		<section class="terms" aria-labelledby="terms-title">
+			<div class="terms-inner shell">
+				<div>
+					<div class="eyebrow">A few useful terms</div>
+					<h2 id="terms-title">Know what you may pay.</h2>
+				</div>
+				<div class="terms-copy">
+					<p><strong>Premium:</strong> what you pay regularly to keep your plan active. <strong>Deductible:</strong> what you pay for certain covered services before the plan starts sharing costs.</p>
+					<p><strong>Copayment or coinsurance:</strong> your share of the cost for a covered service. <strong>Out-of-pocket maximum:</strong> the yearly limit on what you pay for covered services, as defined by your plan.</p>
+				</div>
+			</div>
+		</section>
+
+		<aside class="disclaimer shell">Coverage, costs, provider networks, and eligibility vary by plan and location. This is a general guide, not a quote or a guarantee of benefits. Review your plan documents and contact your insurer with questions about a specific service or bill.</aside>
+
+		<section class="cta">
+			<div class="cta-inner shell">
+				<div><h2>Ready to compare what matters?</h2><p>Start with the coverage details and costs that fit your needs.</p></div>
+				<a class="cta-button" href="{% url 'coverage' %}">Explore coverage <span aria-hidden="true">&rarr;</span></a>
+			</div>
+		</section>
+	</main>
+
+	<footer>
+		<div class="footer-inner shell">
+			<a href="{% url 'home' %}">Health Insurance Health</a>
+			<span>Health coverage, with a little more heart.</span>
+			<div class="footer-links"><a href="{% url 'home' %}">Home</a><a href="{% url 'why_insurance' %}">Why health insurance</a><a href="{% url 'coverage' %}">Coverage</a></div>
+		</div>
+	</footer>
+</body>
+</html>

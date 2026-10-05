@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#f6f8f4">
+	<meta name="description" content="Contact Health Insurance Health member support by phone, WhatsApp, email, or social media.">
+	<title>Member Support | Health Insurance Health</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--ink: #193c35;
+			--muted: #65766f;
+			--paper: #f6f8f4;
+			--white: #fff;
+			--green: #c9e8d7;
+			--green-strong: #287356;
+			--lime: #e3f477;
+			--peach: #f4b99c;
+			--line: #e2e9e2;
+			--serif: "Manrope", sans-serif;
+			--sans: "DM Sans", sans-serif;
+		}
+		* { box-sizing: border-box; }
+		body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+		a { color: inherit; text-decoration: none; }
+		.shell { width: min(1160px, calc(100% - 64px)); margin: 0 auto; }
+		.topbar { height: 82px; display: flex; align-items: center; border-bottom: 1px solid rgba(25, 60, 53, .08); }
+		.nav { display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+		.brand { display: inline-flex; align-items: center; gap: 10px; font: 800 21px var(--serif); white-space: nowrap; }
+		.brand-mark { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 10px; background: var(--green-strong); color: white; }
+		.brand-mark svg { width: 18px; height: 18px; }
+		.nav-links { display: flex; align-items: center; gap: 30px; margin-left: auto; color: #52675f; font-size: 13px; font-weight: 600; }
+		.nav-links a:hover, .nav-links .active, .footer-links a:hover { color: var(--green-strong); }
+		.button { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; padding: 0 18px; border-radius: 6px; background: var(--ink); color: white; font-size: 12px; font-weight: 700; }
+		.button:hover { background: #27584a; }
+		main { padding: 74px 0 86px; }
+		.intro { max-width: 670px; margin-bottom: 42px; }
+		.eyebrow { display: inline-flex; align-items: center; gap: 9px; color: var(--green-strong); font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+		.eyebrow::before { width: 7px; height: 7px; border-radius: 50%; background: #6cb38a; content: ""; }
+		h1, h2, h3, p { margin-top: 0; }
+		h1 { margin: 16px 0 14px; font: 600 clamp(42px, 5vw, 62px)/1.08 var(--serif); }
+		h1 em { color: var(--green-strong); font-style: normal; }
+		.intro p { max-width: 540px; margin: 0; color: var(--muted); font-size: 15px; line-height: 1.75; }
+		.placeholder-note { margin-top: 20px; padding: 13px 16px; border-left: 3px solid #c98963; background: #fff0e9; color: #6e4d3d; font-size: 12px; line-height: 1.6; }
+		.support-layout { display: grid; grid-template-columns: 1.35fr .85fr; gap: 66px; align-items: start; }
+		.channel-list { border-top: 1px solid var(--line); }
+		.channel { display: grid; grid-template-columns: 48px 1fr auto; align-items: center; gap: 17px; min-height: 104px; border-bottom: 1px solid var(--line); }
+		.channel-icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; background: var(--green); color: var(--ink); font: 700 17px var(--serif); }
+		.channel:nth-child(2) .channel-icon { background: #f9d8c7; }
+		.channel:nth-child(3) .channel-icon { background: #e8edac; }
+		.channel:nth-child(4) .channel-icon { background: #dce5f0; }
+		.channel-copy h2 { margin: 0 0 5px; font: 700 15px var(--serif); }
+		.channel-copy p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.55; }
+		.channel-value { max-width: 215px; color: var(--green-strong); font-size: 12px; font-weight: 700; text-align: right; overflow-wrap: anywhere; }
+		.location { padding: 27px; background: #e7efe8; }
+		.location-mark { width: 44px; height: 44px; display: grid; place-items: center; margin-bottom: 25px; border-radius: 50%; background: var(--lime); font-size: 20px; }
+		.location h2 { margin-bottom: 9px; font: 700 19px var(--serif); }
+		.location p { margin-bottom: 17px; color: #52675f; font-size: 13px; line-height: 1.7; }
+		.location .hours { padding-top: 15px; border-top: 1px solid #cfddd1; color: var(--muted); font-size: 11px; }
+		.social { padding-top: 35px; }
+		.social h2 { margin-bottom: 7px; font: 700 19px var(--serif); }
+		.social > p { margin-bottom: 17px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+		.social-list { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
+		.social-link { display: flex; align-items: center; gap: 9px; min-height: 54px; font-size: 12px; font-weight: 700; }
+		.social-link span { width: 27px; height: 27px; display: grid; place-items: center; border-radius: 50%; background: white; color: var(--green-strong); }
+		.social-link:hover { color: var(--green-strong); }
+		footer { padding: 25px 0; border-top: 1px solid var(--line); }
+		.footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 18px; color: var(--muted); font-size: 11px; }
+		.footer-links { display: flex; gap: 20px; }
+		@media (max-width: 850px) {
+			.shell { width: min(100% - 40px, 660px); }
+			.nav-links { gap: 16px; }
+			.support-layout { grid-template-columns: 1fr; gap: 35px; }
+			.location { max-width: none; }
+		}
+		@media (max-width: 620px) {
+			.shell { width: calc(100% - 36px); }
+			.topbar { height: 70px; }
+			.brand { font-size: 18px; }
+			.nav-links { display: none; }
+			.button { min-height: 40px; padding: 0 13px; font-size: 11px; }
+			main { padding: 52px 0 62px; }
+			.intro { margin-bottom: 30px; }
+			.intro p { font-size: 14px; }
+			.channel { grid-template-columns: 42px 1fr; gap: 13px; padding: 16px 0; }
+			.channel-value { grid-column: 2; max-width: none; text-align: left; }
+			.location { padding: 23px; }
+			.social-list { grid-template-columns: 1fr; }
+			.social-link { min-height: 47px; border-bottom: 1px solid var(--line); }
+			.footer-inner { align-items: flex-start; flex-direction: column; }
+		}
+	</style>
+</head>
+<body>
+	<header class="topbar">
+		<nav class="nav shell" aria-label="Main navigation">
+			<a class="brand" href="{% url 'home' %}" aria-label="Health Insurance Health home">
+				<span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 20s-7.2-4.4-7.2-10a4.1 4.1 0 0 1 7.2-2.7A4.1 4.1 0 0 1 19.2 10c0 5.6-7.2 10-7.2 10Z" stroke="currentColor" stroke-width="1.8"/><path d="M7.5 12h3l1.2-2.4 1.7 4.7 1.1-2.3h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+				Health Insurance 
+			</a>
+			<div class="nav-links">
+				<a href="{% url 'coverage' %}">Coverage</a>
+				<a href="{% url 'why_insurance' %}">Why Health Insurance</a>
+				<a href="{% url 'how_it_works' %}">How it works</a>
+				<a class="active" href="{% url 'member_support' %}" aria-current="page">Support</a>
+			</div>
+			<a class="button" href="{% url 'home' %}">Back to home</a>
+		</nav>
+	</header>
+	<main class="shell">
+		<section class="intro" aria-labelledby="support-title">
+			<span class="eyebrow">Here when you need us</span>
+			<h1 id="support-title">A real person is <em>within reach.</em></h1>
+			<p>Questions about your plan, a recent visit, or what to do next? Reach our member support team through the channel that works best for you.</p>
+			<div class="placeholder-note"><strong>Setup note:</strong> The contact details on this demo page are sample placeholders. Replace them with your verified office address, toll-free number, WhatsApp number, email, and official social profiles before publishing.</div>
+		</section>
+		<div class="support-layout">
+			<section class="channel-list" aria-label="Contact support">
+				<div class="channel">
+					<span class="channel-icon" aria-hidden="true">☎</span>
+					<div class="channel-copy"><h2>Toll-free phone</h2><p>Speak with a member support specialist.</p></div>
+					<a class="channel-value" href="tel:+18005550100">1-800-555-0100</a>
+				</div>
+				<div class="channel">
+					<span class="channel-icon" aria-hidden="true">W</span>
+					<div class="channel-copy"><h2>WhatsApp</h2><p>Message our organization account.</p></div>
+					<a class="channel-value" href="https://wa.me/18005550100">Message on WhatsApp</a>
+				</div>
+				<div class="channel">
+					<span class="channel-icon" aria-hidden="true">@</span>
+					<div class="channel-copy"><h2>Email support</h2><p>Send us your question and we’ll get back to you.</p></div>
+					<a class="channel-value" href="mailto:support@Health Insurance.example">support@Health Insurance.example</a>
+				</div>
+			</section>
+			<aside class="location" aria-labelledby="location-title">
+				<span class="location-mark" aria-hidden="true">⌖</span>
+				<h2 id="location-title">Office location</h2>
+				<p>Health Insurance Health<br>123 Example Street<br>Your City, ST 00000</p>
+				<p class="hours">Office hours: Add your support hours and time zone.</p>
+			</aside>
+		</div>
+		<section class="social" aria-labelledby="social-title">
+			<h2 id="social-title">Find us on social</h2>
+			<p>Follow the official Health Insurance Health accounts for updates and community news.</p>
+			<div class="social-list">
+				<a class="social-link" href="https://www.instagram.com/yourhandle/" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">◎</span> Instagram</a>
+				<a class="social-link" href="https://www.facebook.com/yourpage/" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">f</span> Facebook</a>
+				<a class="social-link" href="https://www.twitter.com/yourhandle/" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">X</span> Twitter</a>
+			</div>
+		</section>
+	</main>
+	<footer>
+		<div class="footer-inner shell">
+			<span>Health Insurance Health | Health coverage, with a little more heart.</span>
+			<div class="footer-links"><a href="{% url 'home' %}">Home</a><a href="{% url 'coverage' %}">Coverage</a><a href="{% url 'member_support' %}">Member support</a></div>
+		</div>
+	</footer>
+</body>
+</html>
